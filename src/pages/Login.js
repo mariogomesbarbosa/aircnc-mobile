@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, KeyboardAvoidingView, Text, Image, TextInput, TouchableOpacity } from 'react-native'
 
 import logo from '../assets/logo.png'
 
 export default function Login() {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Image source={logo} />
 
       <View style={styles.form}>
@@ -34,7 +34,7 @@ export default function Login() {
         </TouchableOpacity>
       </View>
       
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
