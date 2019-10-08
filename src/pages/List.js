@@ -50,23 +50,25 @@ const styles = StyleSheet.create({
 
   logo: {
     height: 32,
-    resizeMode: "contain",
-    alignSelf: "center",
+    resizeMode: 'contain',
+    alignSelf: 'center',
     marginTop: 20,
   },
 
   button: {
     height: 52,
-    backgroundColor: '#7259C1',
+    borderWidth: 1,
+    borderColor: '#7259C1',
+    borderRadius: 4,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
     marginHorizontal: 10,
     marginTop: 20,
   },
 
   buttonText: {
-    color: '#fff',
+    color: '#7259C1',
     fontWeight: 'bold',
     fontSize: 16,
   },
