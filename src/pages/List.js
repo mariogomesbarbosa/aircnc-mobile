@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {  AsyncStorage, StyleSheet, SafeAreaView, Text, Image, TouchableOpacity } from 'react-native'
+import {  AsyncStorage, StyleSheet, SafeAreaView, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 
 import SpotList from '../components/SpotList'
 import api from '../services/api'
@@ -33,9 +33,12 @@ export default function List({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image style={styles.logo} source={logo} />
-
-      {techs.map(tech => <SpotList key={tech} tech={tech} />)}
+      
+      <ScrollView style={styles.scrollView}>
+        <Image style={styles.logo} source={logo} />
+        {techs.map(tech => <SpotList key={tech} tech={tech} />)}
+      </ScrollView>
+      
       <TouchableOpacity onPress={handleLogout} style={styles.button}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
@@ -44,6 +47,11 @@ export default function List({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    // marginTop: 20,
+    marginBottom: 5,
+  },
+
   container: {
     flex: 1,
   },
@@ -52,7 +60,7 @@ const styles = StyleSheet.create({
     height: 32,
     resizeMode: 'contain',
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 50,
   },
 
   button: {
@@ -65,6 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
     marginTop: 20,
+    marginBottom: 20,
   },
 
   buttonText: {

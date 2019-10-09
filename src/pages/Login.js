@@ -60,7 +60,7 @@ export default function Login({ navigation }) {
         />
 
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Encontre spots</Text>
+          <Text style={styles.buttonText}>Encontre Spots</Text>
         </TouchableOpacity>
       </View>
       
@@ -115,6 +115,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
-  }
+  },
   
 })
