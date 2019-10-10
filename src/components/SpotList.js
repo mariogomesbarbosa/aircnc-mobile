@@ -8,8 +8,6 @@ function SpotList({ tech, navigation }) {
   const [spots, setSpots] = useState([])
 
   function handleNavigate(id) {
-    
-
     navigation.navigate('Book', { id })
   }
 
