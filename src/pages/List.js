@@ -8,14 +8,9 @@ import logo from '../assets/logo.png'
 
 export default function List({ navigation }) {
   const [techs, setTechs] = useState([])
-  const [email] = useState('')
+  const [name, setName] = useState('')
 
   async function handleLogout() {
-    const response = await api.post('/sessions', {
-      email
-    })
-
-    const {_id } = response.data
 
     await AsyncStorage.removeItem('user')
     await AsyncStorage.removeItem('techs') 
@@ -29,6 +24,12 @@ export default function List({ navigation }) {
 
       setTechs(techsArray)
     })
+
+    AsyncStorage.getItem('name').then(storagedName => {
+      const nameString = storagedName
+
+      setName(nameString)
+    })
   }, [])
 
   return (
@@ -36,6 +37,7 @@ export default function List({ navigation }) {
       
       <ScrollView style={styles.scrollView}>
         <Image style={styles.logo} source={logo} />
+        <Text style={styles.title}>Olá <Text style={styles.bold}>{name}</Text> Tudo bem?</Text>
         {techs.map(tech => <SpotList key={tech} tech={tech} />)}
       </ScrollView>
       
@@ -61,6 +63,18 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
     marginTop: 50,
+  },
+
+  title: {
+    fontSize: 26,
+    color: '#444',
+    paddingHorizontal: 20,
+    marginTop: 30,
+  },
+
+  bold: {
+    fontWeight: 'bold',
+    color: '#444',
   },
 
   button: {

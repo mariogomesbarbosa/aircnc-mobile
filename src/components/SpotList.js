@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#444',
     paddingHorizontal: 20,
     marginBottom: 15,
