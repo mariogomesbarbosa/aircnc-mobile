@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { AsyncStorage, Alert, SafeAreaView, StyleSheet, View, Text, TextInput, TouchableOpacity, DatePickerAndroid } from 'react-native'
 
+import { TextInputMask } from 'react-native-masked-text'
+
 import api from '../services/api'
 
 export default function Book({ navigation }) {
@@ -16,7 +18,7 @@ export default function Book({ navigation }) {
       headers: { user_id }
     })
 
-    Alert. alert('Solicitação de reserva enviada.')
+    Alert.alert('Solicitação de reserva enviada.')
 
     navigation.navigate('List')
   }
@@ -29,15 +31,19 @@ export default function Book({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
         <Text style={styles.label}>Data de Interesse:</Text>
-        <TextInput 
+        <TextInputMask 
           style={styles.input}
           placeholder="Qual data você quer reservar?"
           placeholderTextColor="#999"
-          keyboardType="default"
+          keyboardType="numeric"
           autoCapitalize="words"
           autoCorrect={false}
           value={date}
           onChangeText={setDate}
+          type={'custom'}
+          options={{
+            mask: '99/99/9999'
+          }}
         />
 
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
