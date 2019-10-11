@@ -7,6 +7,7 @@ import logo from '../assets/logo.png'
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [techs, setTechs] = useState('')
 
   useEffect(() => {
@@ -18,12 +19,13 @@ export default function Login({ navigation }) {
   }, [])
 
   async function handleSubmit() {
+    
     const response = await api.post('/sessions', {
       email,
       name
     })
-
-    const {_id, name } = response.data
+    
+    const { _id } = response.data
 
     await AsyncStorage.setItem('user', _id)
     await AsyncStorage.setItem('techs', techs)
@@ -51,6 +53,19 @@ export default function Login({ navigation }) {
           onChangeText={setEmail}
         />
 
+        <Text style={styles.label}>Nome:</Text>
+        <TextInput 
+          style={styles.input}
+          placeholder="Seu nome"
+          placeholderTextColor="#999"
+          textContentType="name"
+          keyboardType="default"
+          autoCapitalize="words"
+          autoCorrect={true}
+          value={name}
+          onChangeText={setName}
+        />
+        
         <Text style={styles.label}>Tecnologias:</Text>
         <TextInput 
           style={styles.input}
