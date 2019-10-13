@@ -8,7 +8,7 @@ import logo from '../assets/logo.png'
 
 export default function List({ navigation }) {
   const [techs, setTechs] = useState([])
-  const [name, setName] = useState('')
+  // const [name, setName] = useState('')
 
   async function handleLogout() {
 
@@ -19,17 +19,37 @@ export default function List({ navigation }) {
   }
 
   useEffect(() => {
-    AsyncStorage.getItem('techs').then(storagedTechs => {
-      const techsArray = storagedTechs.split(',').map(tech => tech.trim())
+    async function getTechs() {
+      const response = await api.get('/spots', {})
 
-      setTechs(techsArray)
-    })
+      let techArray = []
+      response.data.map(async data => {
+        let prom = await data.techs.map(d => {
+          if(techArray.indexOf(d)== -1){
+            techArray.push(d)
+          }
+        })
 
-    AsyncStorage.getItem('name').then(storagedName => {
-      const nameString = storagedName
+        Promise.all(prom).then(() => {
+          console.log(techArray)
+          setTechs(techArray)
+        })
+      })
 
-      setName(nameString)
-    })
+    }
+    getTechs()
+    console.log(techs)
+    // AsyncStorage.getItem('techs').then(storagedTechs => {
+    //   const techsArray = storagedTechs.split(',').map(tech => tech.trim())
+
+    //   setTechs(techsArray)
+    // })
+
+    // AsyncStorage.getItem('name').then(storagedName => {
+    //   const nameString = storagedName
+
+    //   setName(nameString)
+    // })
   }, [])
 
   return (
@@ -37,7 +57,7 @@ export default function List({ navigation }) {
       
       <ScrollView style={styles.scrollView}>
         <Image style={styles.logo} source={logo} />
-        <Text style={styles.title}>Olá <Text style={styles.bold}>{name}</Text> Tudo bem?</Text>
+        <Text style={styles.title}>Olá Tudo bem?</Text>
         {techs.map(tech => <SpotList key={tech} tech={tech} />)}
       </ScrollView>
       
