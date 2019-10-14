@@ -32,7 +32,6 @@ export default function Login({ navigation }) {
     await AsyncStorage.setItem('name', name) 
 
     navigation.navigate('List')
-    console.log(name)
   }
 
   return (

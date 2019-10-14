@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import {  AsyncStorage, StyleSheet, SafeAreaView, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { Alert, AsyncStorage, StyleSheet, SafeAreaView, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import socketio from 'socket.io-client'
 
 import SpotList from '../components/SpotList'
-import api from '../services/api'
 
 import logo from '../assets/logo.png'
 
@@ -17,6 +17,19 @@ export default function List({ navigation }) {
 
     navigation.navigate('Login')
   }
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then(user_id => {
+      const socket = socketio('https://aircnc-back-end.herokuapp.com/', {
+        query: { user_id }
+      })
+
+      socket.on('booking_response', booking => {
+        Alert.alert(`Sua reserva em ${booking.spot.company} para ${booking.date} foi ${booking.approved ? 'Aprovada' : 'Rejeitada'}`)
+      })
+    })
+
+  }, [])
 
   useEffect(() => {
     AsyncStorage.getItem('techs').then(storagedTechs => {
